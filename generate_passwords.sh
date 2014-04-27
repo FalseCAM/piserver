@@ -3,13 +3,17 @@
 # Do not forget to delete the passwords.cfg file afterwards.
 
 # Install gpw if command does not exist
-type -P gpw &>/dev/null || { apt-get install gpw }
+if ! type gpw > /dev/null; then
+  sudo apt-get install gpw
+fi
 
 pwfile="passwords.cfg"
 echo generating passwords and writing them to $pwfile
 
 
 ldap_admin=$(gpw 1 12)
+mysql_admin=$(gpw 1 12)
 
 
 echo "pw_ldap_admin=$ldap_admin" > $pwfile
+echo "pw_mysql_admin=$mysql_admin" >> $pwfile
