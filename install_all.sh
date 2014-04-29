@@ -20,3 +20,6 @@ sh generate_passwords.sh
 
 # install and configure ldap
 sh install_ldap.sh
+
+# install webmin
+sh install_webmin.sh
