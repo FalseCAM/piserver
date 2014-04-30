@@ -11,6 +11,9 @@ fi
 # first configure your raspbian
 raspi-config
 
+# update your system
+sudo apt-get update && sudo apt-get upgrade
+
 
 # configure system
 sh configure_system.sh
