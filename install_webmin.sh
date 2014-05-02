@@ -1,6 +1,8 @@
 #!/bin/sh
 # This script installs webmin
 
+tput setaf 2 && echo 'install webmin' && tput setaf 7
+
 # Install wget if not exists
 if ! type wget > /dev/null; then
   sudo apt-get install wget

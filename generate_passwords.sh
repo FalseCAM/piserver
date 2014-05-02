@@ -2,6 +2,8 @@
 # This script generates some random passwords and saves them to the passwords.cfg file.
 # Do not forget to delete the passwords.cfg file afterwards.
 
+tput setaf 2 && echo 'generate some passwords' && tput setaf 7
+
 # Install gpw if command does not exist
 if ! type gpw > /dev/null; then
   sudo apt-get install gpw

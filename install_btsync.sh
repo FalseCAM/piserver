@@ -1,6 +1,8 @@
 #!/bin/sh
 # This script installs bittorrent sync
 
+tput setaf 2 && echo 'install bittorrent sync' && tput setaf 7
+
 # Install wget if not exists
 if ! type wget > /dev/null; then
   sudo apt-get install wget

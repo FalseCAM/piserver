@@ -21,8 +21,20 @@ sh configure_system.sh
 # generate passwords for all services.
 sh generate_passwords.sh
 
+# install certificates
+sh install_certs.sh
+
 # install and configure ldap
 sh install_ldap.sh
 
+# install apache
+sh install_apache.sh
+
 # install webmin
 sh install_webmin.sh
+
+# install bittorrent sync
+sh install_btsync.sh
+
+# install owncloud
+sh install_owncloud.sh
