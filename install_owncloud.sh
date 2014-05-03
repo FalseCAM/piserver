@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # This script installs owncloud
 
 tput setaf 2 && echo 'install owncloud' && tput setaf 7

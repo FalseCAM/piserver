@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # This script generates some random passwords and saves them to the passwords.cfg file.
 # Do not forget to delete the passwords.cfg file afterwards.
 

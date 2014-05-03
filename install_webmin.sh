@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # This script installs webmin
 
 tput setaf 2 && echo 'install webmin' && tput setaf 7

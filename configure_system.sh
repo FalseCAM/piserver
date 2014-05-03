@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # configure the system
 
 source piserver.cfg

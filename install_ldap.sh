@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # This script installs ldap and configures it.
 
 # Install slapd if not exists

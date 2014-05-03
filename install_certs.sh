@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Install openssl if not exists
 if ! type openssl > /dev/null; then

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # This script installs apache and php
 
 tput setaf 2 && echo 'install apache web server' && tput setaf 7

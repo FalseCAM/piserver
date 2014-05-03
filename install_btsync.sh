@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # This script installs bittorrent sync
 
 source piserver.cfg
