@@ -3,7 +3,7 @@
 # you can comment out scripts you dont want to run by adding '#'.
 
 # check if this script runs as root
-if [[ $EUID -ne 0 ]]; then
+if (( EUID != 0 )); then
   echo "You have to run this script as root user."
   exit 1
 fi
@@ -12,7 +12,7 @@ fi
 raspi-config
 
 # update your system
-sudo apt-get update && sudo apt-get upgrade
+apt-get update && apt-get upgrade
 
 
 # configure system
