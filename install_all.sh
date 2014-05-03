@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 # this script runs all setup scripts.
 # you can comment out scripts you dont want to run by adding '#'.
 
 # check if this script runs as root
-if (( EUID != 0 )); then
+if ! [ $(id -u) = 0 ]; then
   echo "You have to run this script as root user."
   exit 1
 fi
