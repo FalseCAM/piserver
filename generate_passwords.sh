@@ -12,10 +12,11 @@ fi
 pwfile="passwords.cfg"
 echo generating passwords and writing them to $pwfile
 
-
+piserver_admin=$(gpw 1 12)
 ldap_admin=$(gpw 1 12)
 mysql_admin=$(gpw 1 12)
 
 
-echo "pw_ldap_admin=$ldap_admin" > $pwfile
+echo "pw_piserver_admin=$piserver_admin" > $pwfile
+echo "pw_ldap_admin=$ldap_admin" >> $pwfile
 echo "pw_mysql_admin=$mysql_admin" >> $pwfile

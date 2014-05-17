@@ -1,7 +1,8 @@
 #!/bin/bash
 # configure the system
 
-source piserver.cfg
+# load config file
+. "./piserver.cfg"
 
 tput setaf 2 && echo 'configure the system' && tput setaf 7
 
