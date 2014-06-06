@@ -1,0 +1,17 @@
+dn: dc=example,dc=org
+objectClass: top
+objectClass: dcObject
+objectclass: organization
+o: piserver domain
+dc: piserver
+description: piserver domain
+
+
+dn: ou=people,dc=example,dc=org
+ou: people
+objectClass: organizationalUnit
+
+
+dn: ou=groups,dc=example,dc=org
+ou: groups
+objectClass: organizationalUnit

@@ -1,7 +1,8 @@
-dn: cn=config
--
+dn: cn=config,dc=example,dc=net
+changetype: Modify
+
 add: olcTLSCertificateKeyFile
 olcTLSCertificateKeyFile: /etc/ssl/certs/piserver.key
--
+
 add: olcTLSCertificateFile
 olcTLSCertificateFile: /etc/ssl/private/piserver.crt
