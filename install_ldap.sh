@@ -21,7 +21,7 @@ sudo apt-get install libpam-ldapd libnss-ldapd
 echo "session required pam_mkhomedir.so umask=0022 skel=/etc/skel" >> /etc/pam.d/common-session
 
 # configure ldap index
-ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f ldap/indexchange.ldif
+ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f ldap/indexchanges.ldif
 service slapd stop
 sudo -u openldap slapindex
 service slapd start
