@@ -16,3 +16,10 @@ usermod -a -G www-data www-data
 
 # create piserver data directory
 mkdir -p $piserverfolder
+
+# uncomment following to prepare an external hdd on /dev/sda
+# umount /dev/sda1
+# mkfs.ext4 /dev/sda1 -L PISERVERDATA
+# sudo su -c "echo 'LABEL=PISERVERDATA  $piserverfolder  ext4  defaults 0 2' >> /etc/fstab"
+# mount -a
+# chmod 1777 $piserverfolder

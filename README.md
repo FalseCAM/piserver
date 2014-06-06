@@ -2,7 +2,7 @@
 ========
 
 Shell scripts to setup a small server for home/family on raspberry pi.
-
+Based on Raspbian Debian Wheezy.
 ========
 ## Quickstart:
 
