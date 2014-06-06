@@ -24,11 +24,10 @@ echo "session required pam_mkhomedir.so umask=0022 skel=/etc/skel" >> /etc/pam.d
 ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f ldap/indexchanges.ldif
 service slapd stop
 sudo -u openldap slapindex
-service slapd start
 
 # configure secure connections
-sed -i 's/^SLAPD_SERVICES=.*/SLAPD_SERVICES="ldap://127.0.0.1:389/ ldaps:/// ldapi:///"' /etc/default/slapd
-
+sed -i 's/^SLAPD_SERVICES=.*/SLAPD_SERVICES="ldap:\/\/127.0.0.1:389\/ ldaps:\/\/\/ ldapi:\/\/\/"/g' /etc/default/slapd
+service slapd start
 ldapmodify -Y EXTERNAL -H ldapi:/// -f ldap/olcSSL.ldif
 
 # add openldap user to ssl-cert group

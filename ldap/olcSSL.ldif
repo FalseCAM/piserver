@@ -1,7 +1,7 @@
 dn: cn=config
 -
 add: olcTLSCertificateKeyFile
-olcTLSCertificateKeyFile: /etc/ssl/localcerts/piserver.key
+olcTLSCertificateKeyFile: /etc/ssl/certs/piserver.key
 -
 add: olcTLSCertificateFile
-olcTLSCertificateFile: /etc/ssl/localcerts/piserver.crt
+olcTLSCertificateFile: /etc/ssl/private/piserver.crt
