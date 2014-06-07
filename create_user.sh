@@ -7,10 +7,11 @@ if ! [ $(id -u) = 0 ]; then
   exit 1
 fi
 
-user = $1
-name = $2
+user=$1
+name=$2
 
-if id -u $user >/dev/null 2>&1; then
+if id -u $1 >/dev/null 2>&1; then
+		echo "Parameters missing, stopping script.
         exit 1
 else
         echo "creating user $user"
@@ -21,8 +22,8 @@ fi
 
 # create user
 useradd -m $user
-uidNumber = id -u $user
-gidNumber = id -g $user
+uidNumber=id -u $user
+gidNumber=id -g $user
 
 echo "dn: uid=${user},ou=people,${ldapdc}" > create_user.ldif
 echo "objectClass: inetOrgPerson" >> create_user.ldif
@@ -38,7 +39,7 @@ echo "homeDirectory: /home/${uid}" >> create_user.ldif
 ldapadd -Y EXTERNAL -H ldapi:/// -f create_user.ldif
 rm -rf create_user.ldif
 
-userdatadir = ${piserverfolder}data/${user}
+userdatadir=${piserverfolder}data/${user}
 mkdir -p $userdatadir
 
 chown uidNumber $userdatadir
