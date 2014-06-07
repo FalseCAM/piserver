@@ -10,11 +10,13 @@ fi
 user=$1
 name=$2
 
-if id -u $1 >/dev/null 2>&1; then
-		echo "Parameters missing, stopping script.
-        exit 1
-else
-        echo "creating user $user"
+echo "User: $user"
+echo "Name: $name"
+
+if [ ! $# -ge 1 ];
+then
+printf "No arguments given."
+exit 2;
 fi
 
 # load config file
@@ -22,8 +24,8 @@ fi
 
 # create user
 useradd -m $user
-uidNumber=id -u $user
-gidNumber=id -g $user
+uidNumber=$(id -u $user)
+gidNumber=$(id -g $user)
 
 echo "dn: uid=${user},ou=people,${ldapdc}" > create_user.ldif
 echo "objectClass: inetOrgPerson" >> create_user.ldif
@@ -42,10 +44,13 @@ rm -rf create_user.ldif
 userdatadir=${piserverfolder}data/${user}
 mkdir -p $userdatadir
 
-chown uidNumber $userdatadir
-chgrp gidNumber $userdatadir
+echo "Homedir: /home/${uid}"
+echo "Userdatadir: $userdatadir"
+
+chown $uidNumber $userdatadir
+chgrp $gidNumber $userdatadir
 
 ln -s $userdatadir /home/${uid}/data 
 
-chown uidNumber /home/${uid}/data 
-chgrp gidNumber /home/${uid}/data 
+chown $uidNumber /home/${uid}/data 
+chgrp $gidNumber /home/${uid}/data 
