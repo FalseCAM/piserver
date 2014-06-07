@@ -60,3 +60,6 @@ ln -s $userdatadir /home/${user}/data
 
 chown $uidNumber /home/${user}/data 
 chgrp $gidNumber /home/${user}/data 
+
+chmod -R 0700 /home/$user 
+chmod -R 0700 $userdatadir
