@@ -9,6 +9,7 @@ fi
 
 user=$1
 name=$2
+lastname=$3
 
 echo "User: $user"
 echo "Name: $name"
@@ -35,11 +36,13 @@ echo "objectClass: inetOrgPerson" >> create_user.ldif
 echo "objectClass: posixAccount" >> create_user.ldif
 echo "objectClass: shadowAccount" >> create_user.ldif
 echo "uid: ${user}" >> create_user.ldif
+echo "sn: ${lastname}" >> create_user.ldif
+echo "cn: ${name} ${lastname}" >> create_user.ldif
 echo "displayName: ${name}" >> create_user.ldif
 echo "uidNumber: ${uidNumber}" >> create_user.ldif
 echo "gidNumber: ${gidNumber}" >> create_user.ldif
 echo "loginShell: /bin/bash" >> create_user.ldif
-echo "homeDirectory: /home/${uid}" >> create_user.ldif
+echo "homeDirectory: /home/${user}" >> create_user.ldif
 
 ldapadd -Y EXTERNAL -H ldapi:/// -f create_user.ldif
 rm -rf create_user.ldif
@@ -53,7 +56,7 @@ echo "Userdatadir: $userdatadir"
 chown $uidNumber $userdatadir
 chgrp $gidNumber $userdatadir
 
-ln -s $userdatadir /home/${uid}/data 
+ln -s $userdatadir /home/${user}/data 
 
-chown $uidNumber /home/${uid}/data 
-chgrp $gidNumber /home/${uid}/data 
+chown $uidNumber /home/${user}/data 
+chgrp $gidNumber /home/${user}/data 
