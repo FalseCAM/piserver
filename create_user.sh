@@ -24,6 +24,9 @@ fi
 
 # create user
 useradd -m $user
+
+su $user -c echo "creating user home"
+
 uidNumber=$(id -u $user)
 gidNumber=$(id -g $user)
 
@@ -44,7 +47,7 @@ rm -rf create_user.ldif
 userdatadir=${piserverfolder}data/${user}
 mkdir -p $userdatadir
 
-echo "Homedir: /home/${uid}"
+echo "Homedir: /home/${user}"
 echo "Userdatadir: $userdatadir"
 
 chown $uidNumber $userdatadir
