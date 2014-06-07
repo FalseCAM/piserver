@@ -30,10 +30,6 @@ ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f ldap/indexchanges.ldif
 service slapd stop
 sudo -u openldap slapindex
 
-# configure secure connections
-sed -i 's/^SLAPD_SERVICES=.*/SLAPD_SERVICES="ldap:\/\/127.0.0.1:389\/ ldaps:\/\/\/ ldapi:\/\/\/"/g' /etc/default/slapd
-ldapmodify -Y EXTERNAL -H ldapi:/// -f ldap/olcSSL.ldif
-
 # create directory tree
 sed -i 's/dc=example,dc=org/$ldapdc/g' ldap/directorytree.ldif
 ldapadd -Y EXTERNAL -H ldapi:/// -f ldap/directorytree.ldif
@@ -44,9 +40,9 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f ldap/groups.ldif
 
 service slapd start
 
-# add openldap user to ssl-cert group
-usermod -a -G ssl-cert openldap
-
 # install ldap-account-manager, a web based ldap config tool
 tput setaf 2 && echo 'install ldap-account-manager, a web based ldap config tool' && tput setaf 7
 apt-get install ldap-account-manager
+
+#install tls certificate
+sh install_ldap_tls.sh
