@@ -1,17 +1,7 @@
-dn: dc=example,dc=org
-objectClass: top
-objectClass: dcObject
-objectclass: organization
-o: piserver domain
-dc: piserver
-description: piserver domain
-
-
-dn: ou=people,dc=example,dc=org
-ou: people
+dn: ou=People,dc=spinlock,dc=hr
+ou: People
 objectClass: organizationalUnit
 
-
-dn: ou=groups,dc=example,dc=org
-ou: groups
+dn: ou=Group,dc=spinlock,dc=hr
+ou: Group
 objectClass: organizationalUnit
