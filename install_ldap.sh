@@ -32,11 +32,11 @@ sudo -u openldap slapindex
 
 # create directory tree
 sed -i 's/dc=example,dc=org/${ldapdc}/g' ldap/directorytree.ldif
-ldapadd -c -v -l ldap/directorytree.ldif
+slapadd -c -v -l ldap/directorytree.ldif
 
 # create group
 sed -i 's/dc=example,dc=org/${ldapdc}/g' ldap/groups.ldif
-ldapadd -c -v -l ldap/groups.ldif
+slapadd -c -v -l ldap/groups.ldif
 
 service slapd start
 
