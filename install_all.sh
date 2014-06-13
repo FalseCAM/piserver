@@ -38,3 +38,6 @@ sh install_btsync.sh
 
 # install owncloud
 sh install_owncloud.sh
+
+# install fail2ban
+sh install_fail2ban.sh
