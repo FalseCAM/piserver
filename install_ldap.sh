@@ -17,7 +17,7 @@ fi
 tput setaf 2 && echo 'install ldap' && tput setaf 7
 
 # reconfigure
-dpgk-reconfigure slapd
+dpkg-reconfigure slapd
 
 #install libpam and libnss with ldap backend
 apt-get install libpam-ldapd libnss-ldapd
@@ -26,17 +26,17 @@ apt-get install libpam-ldapd libnss-ldapd
 echo "session required pam_mkhomedir.so umask=0022 skel=/etc/skel" >> /etc/pam.d/common-session
 
 # configure ldap index
-ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f ldap/indexchanges.ldif
+ldapmodify -Y EXTERNAL -H ldapi:/// -f ldap/indexchanges.ldif
 service slapd stop
 sudo -u openldap slapindex
 
 # create directory tree
-sed -i 's/dc=example,dc=org/$ldapdc/g' ldap/directorytree.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -f ldap/directorytree.ldif
+sed -i 's/dc=example,dc=org/${ldapdc}/g' ldap/directorytree.ldif
+ldapadd -c -v -l ldap/directorytree.ldif
 
 # create group
-sed -i 's/dc=example,dc=org/$ldapdc/g' ldap/groups.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -f ldap/groups.ldif
+sed -i 's/dc=example,dc=org/${ldapdc}/g' ldap/groups.ldif
+ldapadd -c -v -l ldap/groups.ldif
 
 service slapd start
 
