@@ -31,24 +31,16 @@ su $user -c echo "creating user home"
 uidNumber=$(id -u $user)
 gidNumber=$(id -g $user)
 
-echo "dn: cn=${user},ou=group,${ldapdc}" > create_user.ldif
-echo "cn: ${user}" > create_user.ldif
-echo "gidNumber: ${gidNumber}" > create_user.ldif
-echo "objectClass: top" > create_user.ldif
-echo "objectClass: posixGroup" > create_user.ldif
-echo "" > create_user.ldif
 echo "dn: uid=${user},ou=people,${ldapdc}" > create_user.ldif
+echo "objectClass: inetOrgPerson" >> create_user.ldif
+echo "objectClass: posixAccount" >> create_user.ldif
+echo "objectClass: shadowAccount" >> create_user.ldif
 echo "uid: ${user}" >> create_user.ldif
 echo "sn: ${lastname}" >> create_user.ldif
 echo "cn: ${name} ${lastname}" >> create_user.ldif
 echo "displayName: ${name}" >> create_user.ldif
 echo "uidNumber: ${uidNumber}" >> create_user.ldif
 echo "gidNumber: ${gidNumber}" >> create_user.ldif
-echo "objectClass: top" >> create_user.ldif
-echo "objectClass: person" >> create_user.ldif
-echo "objectClass: inetOrgPerson" >> create_user.ldif
-echo "objectClass: posixAccount" >> create_user.ldif
-echo "objectClass: shadowAccount" >> create_user.ldif
 echo "loginShell: /bin/bash" >> create_user.ldif
 echo "homeDirectory: /home/${user}" >> create_user.ldif
 

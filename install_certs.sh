@@ -10,6 +10,9 @@ fi
 # create group for certificates
 addgroup --system 'ssl-cert'
 
+# create directory to store created certifications
+mkdir -p /etc/ssl/localcerts
+
 # create a self signed certificate
 echo 'creating server certificate'
 openssl req -newkey rsa:2048 -x509 -days 3650 -nodes -out /etc/ssl/certs/piserver.crt -keyout /etc/ssl/private/piserver.key
