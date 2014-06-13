@@ -24,16 +24,16 @@ apt-get install libpam-ldapd libnss-ldapd
 
 # add mkhomedir to config
 echo "session required pam_mkhomedir.so umask=0022 skel=/etc/skel" >> /etc/pam.d/common-session
-
+service slapd start
 # configure ldap index
 ldapmodify -Y EXTERNAL -H ldapi:/// -f ldap/indexchanges.ldif
 service slapd stop
 sudo -u openldap slapindex
-
+echo "creating directory tree"
 # create directory tree
 sed -i "s/dc=example,dc=org/${ldapdc}/g" "ldap/directorytree.ldif"
 slapadd -c -v -l ldap/directorytree.ldif
-
+echo "adding groups"
 # create group
 sed -i "s/dc=example,dc=org/${ldapdc}/g" "ldap/groups.ldif"
 slapadd -c -v -l ldap/groups.ldif
