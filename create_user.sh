@@ -52,7 +52,8 @@ echo "objectClass: shadowAccount" >> create_user.ldif
 echo "loginShell: /bin/bash" >> create_user.ldif
 echo "homeDirectory: /home/${user}" >> create_user.ldif
 
-ldapadd -Y EXTERNAL -H ldapi:/// -f create_user.ldif
+ldapadd -c -x -D cn=admin,${ldapdc} -W -f create_user.ldif
+
 rm -rf create_user.ldif
 
 userdatadir=${piserverfolder}data/${user}
