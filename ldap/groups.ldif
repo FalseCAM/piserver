@@ -3,3 +3,9 @@ cn: users
 gidNumber: 10000
 objectClass: top
 objectClass: posixGroup
+-
+dn: cn=owncloud_user,ou=groups,dc=example,dc=org
+cn: owncloud_user
+gidNumber: 10005
+objectClass: top
+objectClass: posixGroup
