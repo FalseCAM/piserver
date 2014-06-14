@@ -67,7 +67,7 @@ chgrp $gidNumber $userdatadir
 
 # prepare btsync folder
 mkdir -p /home/${user}/.btsync
-cp btsync_config.json /home/${user}/.btsync
+cp btsync_config.json /home/${user}/.btsync/config.json
 
 ln -s $userdatadir /home/${user}/data 
 
