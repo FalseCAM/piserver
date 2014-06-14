@@ -32,12 +32,12 @@ uidNumber=$(id -u $user)
 gidNumber=$(id -g $user)
 
 echo "dn: cn=${user},ou=group,${ldapdc}" > create_user.ldif
-echo "cn: ${user}" > create_user.ldif
-echo "gidNumber: ${gidNumber}" > create_user.ldif
-echo "objectClass: top" > create_user.ldif
-echo "objectClass: posixGroup" > create_user.ldif
-echo "" > create_user.ldif
-echo "dn: uid=${user},ou=people,${ldapdc}" > create_user.ldif
+echo "cn: ${user}" >> create_user.ldif
+echo "gidNumber: ${gidNumber}" >> create_user.ldif
+echo "objectClass: top" >> create_user.ldif
+echo "objectClass: posixGroup" >> create_user.ldif
+echo "" >> create_user.ldif
+echo "dn: uid=${user},ou=people,${ldapdc}" >> create_user.ldif
 echo "uid: ${user}" >> create_user.ldif
 echo "sn: ${lastname}" >> create_user.ldif
 echo "cn: ${name} ${lastname}" >> create_user.ldif
