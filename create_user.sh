@@ -65,10 +65,14 @@ echo "Userdatadir: $userdatadir"
 chown $uidNumber $userdatadir
 chgrp $gidNumber $userdatadir
 
+# prepare btsync folder
+mkdir -p /home/${user}/.btsync
+cp btsync_config.json /home/${user}/.btsync
+
 ln -s $userdatadir /home/${user}/data 
 
-chown $uidNumber /home/${user}/data 
-chgrp $gidNumber /home/${user}/data 
+chown -R $uidNumber /home/${user}/data 
+chgrp -R $gidNumber /home/${user}/data 
 
 chmod -R 0700 /home/$user 
 chmod -R 0700 $userdatadir

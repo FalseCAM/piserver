@@ -1,7 +1,10 @@
 #!/bin/bash
 # This script installs bittorrent sync
 
-source piserver.cfg
+# load config file
+. "./piserver.cfg"
+#load ldap admin password
+. "./passwords.cfg"
 
 tput setaf 2 && echo 'install bittorrent sync' && tput setaf 7
 
@@ -18,15 +21,11 @@ tar -xfv btsync_arm.tar.gz
 mv LICENSE.txt btsync-LICENSE.txt
 
 # move btsync to /usr/bin folder
-sudo mv btsync* /usr/bin
+mv btsync* /usr/bin
+sed -i "s/dc=example,dc=org/${ldapdc}/g" "run_btsync.php"
+sed -i "s/password/${pw_ldap_admin}/g" "run_btsync.php"
+cp run_btsync.php /usr/bin
+chmod 700 /usr/bin/run_btsync.php
 
-# create data directory
-mkdir -p $btsyncdatafolder
-
-# install jq
-wget http://stedolan.github.io/jq/download/source/jq-1.3.tar.gz
-tar -xfv jq-1.3.tar.gz
-cd jq-1.3
-./configure
-make
-make install
+# install crontab to restart daily
+crontab -l | { cat; echo "0 */2 * * * php5 /usr/bin/run_btsync.php"; } | crontab -
