@@ -31,7 +31,7 @@ su $user -c echo "creating user home"
 uidNumber=$(id -u $user)
 gidNumber=$(id -g $user)
 
-echo "dn: cn=${user},ou=group,${ldapdc}" > create_user.ldif
+echo "dn: cn=${user},ou=groups,${ldapdc}" > create_user.ldif
 echo "cn: ${user}" >> create_user.ldif
 echo "gidNumber: ${gidNumber}" >> create_user.ldif
 echo "objectClass: top" >> create_user.ldif

@@ -37,7 +37,7 @@ echo "adding groups"
 # create group
 sed -i "s/dc=example,dc=org/${ldapdc}/g" "ldap/groups.ldif"
 slapadd -c -v -l ldap/groups.ldif
-
+chown -R openldap:openldap /var/lib/ldap
 service slapd start
 
 # install ldap-account-manager, a web based ldap config tool
