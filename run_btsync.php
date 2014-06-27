@@ -7,7 +7,7 @@ if (!$ldapBind)
   die('Connection error.');
 }
 
-$search = ldap_search($connection, 'cn=owncloud_user,ou=groups,dc=example,dc=org', "(memberUid=*)",array('memberUid'));
+$search = ldap_search($connection, 'cn=btsync_user,ou=groups,dc=example,dc=org', "(memberUid=*)",array('memberUid'));
 $results = ldap_get_entries($connection, $search);
 
 

@@ -24,17 +24,20 @@ chown openldap: '/etc/ldap/slapd.d/cn=config/cn=schema/cn={4}samba.ldif'
 /etc/init.d/slapd start
 
 # change samba config
+sed -i "s/ passdb backend = tdbsam/ # passdb backend = tdbsam/" /etc/samba/smb.conf
 
-echo "passdb backend = ldapsam:ldap://localhost" >> /etc/samba/smb.conf
-echo "ldap suffix = ${ldapdc}" >> /etc/samba/smb.conf
-echo "ldap admin dn = cn=admin,${ldapdc}" >> /etc/samba/smb.conf
-echo "ldap ssl = no" >> /etc/samba/smb.conf
-echo "ldap passwd sync = Yes" >> /etc/samba/smb.conf
-echo "ldap machine suffix     = ou=computers" >> /etc/samba/smb.conf
-echo "ldap group suffix       = ou=groups" >> /etc/samba/smb.conf
-echo "ldap user suffix        = ou=people" >> /etc/samba/smb.conf
+sed -i "s/workgroup = WORKGROUP/workgroup = WORKGROUP\n" \
+	"passdb backend = ldapsam:ldap://localhost\n" \
+	"ldap suffix = ${ldapdc}\n" \
+	"ldap admin dn = cn=admin,${ldapdc}\n" \
+	"ldap ssl = no\n" \
+	"ldap passwd sync = Yes\n" \
+	"ldap machine suffix     = ou=computers\n" \
+	"ldap group suffix       = ou=groups\n" \
+	"ldap user suffix        = ou=people\n" \
+	"" /etc/samba/smb.conf
 
-restart smbd
+sudo /etc/init.d/samba restart
 
 smbpasswd -w $pw_ldap_admin
 
