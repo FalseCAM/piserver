@@ -25,6 +25,6 @@ cp run_btsync.php /usr/bin
 chmod 700 /usr/bin/run_btsync.php
 
 # install crontab to restart daily
-crontab -l | { cat; echo "0 */2 * * * php5 /usr/bin/run_btsync.php"; } | crontab -
+(crontab -l ; echo "0 */2 * * * php5 /usr/bin/run_btsync.php")| crontab - 
 
 rm -rf btsync_arm.tar.gz
