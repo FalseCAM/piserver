@@ -16,7 +16,7 @@ zcat /usr/share/doc/samba-doc/examples/LDAP/samba.schema.gz > /etc/ldap/schema/s
 
 # create samba ldif from samba config
 mkdir /tmp/slapd.d
-slaptest -f samba.conf -F /tmp/slapd.d/
+slaptest -f ldap/samba.conf -F /tmp/slapd.d/
 
 cp "/tmp/slapd.d/cn=config/cn=schema/cn={4}samba.ldif" "/etc/ldap/slapd.d/cn=config/cn=schema"
 chown openldap: '/etc/ldap/slapd.d/cn=config/cn=schema/cn={4}samba.ldif'
@@ -34,4 +34,7 @@ echo "ldap machine suffix     = ou=computers" >> /etc/samba/smb.conf
 echo "ldap group suffix       = ou=groups" >> /etc/samba/smb.conf
 echo "ldap user suffix        = ou=people" >> /etc/samba/smb.conf
 
+restart smbd
+
 smbpasswd -w $pw_ldap_admin
+
