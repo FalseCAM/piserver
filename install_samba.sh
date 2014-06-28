@@ -26,16 +26,7 @@ chown openldap: '/etc/ldap/slapd.d/cn=config/cn=schema/cn={4}samba.ldif'
 # change samba config
 sed -i "s/ passdb backend = tdbsam/ # passdb backend = tdbsam/" /etc/samba/smb.conf
 
-sed -i "s/workgroup = WORKGROUP/workgroup = WORKGROUP\n
-	;option LDAP\n
-	passdb backend = ldapsam:ldap:\/\/localhost\n
-	ldap suffix = ${ldapdc}\n
-	ldap admin dn = cn=admin,${ldapdc}\n
-	ldap ssl = no\n
-	ldap passwd sync = Yes\n
-	ldap machine suffix     = ou=computers\n
-	ldap group suffix       = ou=groups\n
-	ldap user suffix        = ou=people\n/g" /etc/samba/smb.conf
+sed -i "s/workgroup = WORKGROUP/workgroup = WORKGROUP\n ;option LDAP\n passdb backend = ldapsam:ldap:\/\/localhost\n ldap suffix = ${ldapdc}\n ldap admin dn = cn=admin,${ldapdc}\n ldap ssl = no\n ldap passwd sync = Yes\n ldap machine suffix     = ou=computers\n ldap group suffix       = ou=groups\n ldap user suffix        = ou=people\n/g" /etc/samba/smb.conf
 
 sudo /etc/init.d/samba restart
 
