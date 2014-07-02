@@ -76,3 +76,6 @@ chgrp -R $gidNumber /home/${user}/data
 
 chmod -R 0700 /home/$user 
 chmod -R 0700 $userdatadir
+
+chown -R $uidNumber $userdatadir
+chgrp -R $gidNumber $userdatadir

@@ -8,12 +8,6 @@ if ! [ $(id -u) = 0 ]; then
   exit 1
 fi
 
-# first configure your raspbian
-raspi-config
-
-# update your system
-apt-get update && apt-get upgrade
-
 
 # configure system
 sh configure_system.sh
