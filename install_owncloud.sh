@@ -42,16 +42,10 @@ echo '<IfModule mod_ssl.c>' > /etc/apache2/sites-available/owncloud
 echo '<VirtualHost _default_:443>' >> /etc/apache2/sites-available/owncloud
 echo '        ServerName owncloud.${hostname}' >> /etc/apache2/sites-available/owncloud
 echo '        ServerAdmin webmaster@localhost' >> /etc/apache2/sites-available/owncloud
-echo '        DocumentRoot /var/www' >> /etc/apache2/sites-available/owncloud
+echo '        DocumentRoot /var/www/owncloud' >> /etc/apache2/sites-available/owncloud
 echo '       <Directory />' >> /etc/apache2/sites-available/owncloud
 echo '                Options FollowSymLinks' >> /etc/apache2/sites-available/owncloud
 echo '                AllowOverride None' >> /etc/apache2/sites-available/owncloud
-echo '        </Directory>' >> /etc/apache2/sites-available/owncloud
-echo '        <Directory /var/www/>' >> /etc/apache2/sites-available/owncloud
-echo '                Options Indexes FollowSymLinks MultiViews' >> /etc/apache2/sites-available/owncloud
-echo '                AllowOverride None' >> /etc/apache2/sites-available/owncloud
-echo '                Order allow,deny' >> /etc/apache2/sites-available/owncloud
-echo '                allow from all' >> /etc/apache2/sites-available/owncloud
 echo '        </Directory>' >> /etc/apache2/sites-available/owncloud
 echo '        ErrorLog ${APACHE_LOG_DIR}/error.log' >> /etc/apache2/sites-available/owncloud
 echo '        LogLevel warn' >> /etc/apache2/sites-available/owncloud
