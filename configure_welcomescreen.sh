@@ -11,7 +11,7 @@ tput setaf 2 && echo 'configure console welcome screen' && tput setaf 7
   sudo apt-get install figlet
   
 echo 'figlet "PiServer \"$(hostname)\""' >> /home/pi/.bash_profile
-echo "systemup=$(uptime | awk -F ', lo' '{print \$1}' )" >> /home/pi/.bash_profile
+echo "systemup=\$(uptime | awk -F ', lo' '{print \$1}' )" >> /home/pi/.bash_profile
 echo 'echo \"Uptime:$systemup\"' >> /home/pi/.bash_profile
 echo "temperature=\$(/opt/vc/bin/vcgencmd measure_temp | awk -F 'temp=' '{print \$NF}' | awk -F \"'C\" '{print \$1}')" >> /home/pi/.bash_profile
 echo 'echo \"Temperature: \$temperature C\"' >> /home/pi/.bash_profile
