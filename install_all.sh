@@ -35,3 +35,6 @@ sh install_owncloud.sh
 
 # install fail2ban
 sh install_fail2ban.sh
+
+#configure welcome screen
+sh configure_welcomescreen.sh
