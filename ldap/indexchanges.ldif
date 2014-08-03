@@ -22,7 +22,13 @@ add: olcDbIndex
 olcDbIndex: gidNumber eq
 -
 add: olcDbIndex
+olcDbIndex: memberUid eq
+-
+add: olcDbIndex
 olcDbIndex: mail,givenName eq,subinitial
 -
 add: olcDbIndex
 olcDbIndex: dc eq
+-
+add: olcDbIndex
+olcDbIndex: sambaSID eq
