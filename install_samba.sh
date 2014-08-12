@@ -30,5 +30,10 @@ sed -i "s/workgroup = WORKGROUP/workgroup = WORKGROUP\n ;option LDAP\n passdb ba
 
 sudo /etc/init.d/samba restart
 
+ldapmodify -Y EXTERNAL -H ldapi:/// -f ldap/sambaindex.ldif
+/etc/init.d/slapd stop
+sudo -u openldap slapindex
+/etc/init.d/slapd start
+
 smbpasswd -w $pw_ldap_admin
 

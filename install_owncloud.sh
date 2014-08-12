@@ -32,15 +32,21 @@ mv owncloud /var/www/
 # change owner of files
 chown -R www-data:www-data /var/www/
 
+# create owncloud datadir
+mkdir $ownclouddatafolder
+chown -R www-data:www-data $ownclouddatafolder
+chmod 770 $ownclouddatafolder
+
 #enable apache modules
 a2enmod rewrite
 a2enmod ssl
+a2enmod dav
 
 
 #create owncloud apache config
 echo '<IfModule mod_ssl.c>' > /etc/apache2/sites-available/owncloud
 echo '<VirtualHost _default_:443>' >> /etc/apache2/sites-available/owncloud
-echo '        ServerName owncloud.${hostname}' >> /etc/apache2/sites-available/owncloud
+echo "        ServerName owncloud.${hostname}" >> /etc/apache2/sites-available/owncloud
 echo '        ServerAdmin webmaster@localhost' >> /etc/apache2/sites-available/owncloud
 echo '        DocumentRoot /var/www/owncloud' >> /etc/apache2/sites-available/owncloud
 echo '       <Directory />' >> /etc/apache2/sites-available/owncloud

@@ -29,6 +29,3 @@ olcDbIndex: mail,givenName eq,subinitial
 -
 add: olcDbIndex
 olcDbIndex: dc eq
--
-add: olcDbIndex
-olcDbIndex: sambaSID eq

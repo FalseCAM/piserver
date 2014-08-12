@@ -74,6 +74,8 @@ ln -s $userdatadir /home/${user}/data
 chown -R $uidNumber /home/${user}/data 
 chgrp -R $gidNumber /home/${user}/data 
 
+chown -R $uidNumber /home/${user}
+chgrp -R $gidNumber /home/${user}
 chmod -R 0700 /home/$user 
 chmod -R 0700 $userdatadir
 
