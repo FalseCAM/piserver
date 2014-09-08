@@ -66,8 +66,8 @@ chown $uidNumber $userdatadir
 chgrp $gidNumber $userdatadir
 
 # prepare btsync folder
-mkdir -p /home/${user}/.btsync
-cp btsync_config.json /home/${user}/.btsync/config.json
+mkdir -p /home/${user}/.sync
+cp btsync_config.json /home/${user}/.sync/config.json
 
 ln -s $userdatadir /home/${user}/data 
 

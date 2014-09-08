@@ -21,10 +21,10 @@ tar -xvf btsync_arm.tar.gz -C /usr/bin btsync
 
 sed -i "s/dc=example,dc=org/${ldapdc}/g" "run_btsync.php"
 sed -i "s/password/${pw_ldap_admin}/g" "run_btsync.php"
-cp run_btsync.php /usr/bin
-chmod 700 /usr/bin/run_btsync.php
+cp btsync /etc/init.d
+chmod +x /etc/init.d/btsync
 
 # install crontab to restart daily
-(crontab -l ; echo "0 */2 * * * php5 /usr/bin/run_btsync.php")| crontab - 
+(crontab -l ; echo "0 */2 * * * /etc/init.d/btsync restart")| crontab - 
 
 rm -rf btsync_arm.tar.gz
