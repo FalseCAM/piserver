@@ -14,7 +14,7 @@ if ! type wget > /dev/null; then
 fi
 
 # download btsync package
-wget http://download-new.utorrent.com/endpoint/btsync/os/linux-arm/track/stable btsync_arm.tar.gz
+wget -O btsync_arm.tar.gz http://download-new.utorrent.com/endpoint/btsync/os/linux-arm/track/stable
 
 # extract btsync
 tar -xvf btsync_arm.tar.gz -C /usr/bin btsync
