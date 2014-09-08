@@ -14,17 +14,15 @@ if ! type wget > /dev/null; then
 fi
 
 # download btsync package
-wget http://btsync.s3-website-us-east-1.amazonaws.com/btsync_arm.tar.gz
+wget http://download-new.utorrent.com/endpoint/btsync/os/linux-arm/track/stable
 
 # extract btsync
 tar -xvf btsync_arm.tar.gz -C /usr/bin btsync
 
-sed -i "s/dc=example,dc=org/${ldapdc}/g" "run_btsync.php"
-sed -i "s/password/${pw_ldap_admin}/g" "run_btsync.php"
-cp btsync /etc/init.d
+cp btsync_daemon /etc/init.d/btsync
 chmod +x /etc/init.d/btsync
 
 # install crontab to restart daily
-(crontab -l ; echo "0 */2 * * * /etc/init.d/btsync restart")| crontab - 
+(crontab -l 2>/dev/null; echo "0 */2 * * * /etc/init.d/btsync restart")| crontab - 
 
 rm -rf btsync_arm.tar.gz
