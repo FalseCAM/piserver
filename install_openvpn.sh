@@ -15,7 +15,7 @@ cp -r /usr/share/doc/openvpn/examples/easy-rsa/2.0 /etc/openvpn/easy-rsa
 sed -i "s/export EASY_RSA=.*/export EASY_RSA=\"/etc/openvpn/easy-rsa\"/g" "/etc/openvpn/easy-rsa/vars"
 
 # load vars
-source "/etc/openvpn/easy-rsa/vars"
+. "/etc/openvpn/easy-rsa/vars"
 
 /etc/openvpn/easy-rsa/clean-all
 /etc/openvpn/easy-rsa/pkitool --initca
@@ -34,8 +34,7 @@ echo "push \"redirect-gateway def1\"" >> /etc/openvpn/server.conf
 echo "push \"dhcp-option DNS 10.8.0.1\"" >> /etc/openvpn/server.conf
 echo "plugin /usr/lib/openvpn/openvpn-auth-ldap.so /etc/openvpn/auth/auth-ldap.conf" >> /etc/openvpn/server.conf
 echo "client-cert-not-required" >> /etc/openvpn/server.conf
-
-push "redirect-gateway def1"
+echo "log    /var/log/openvpn.log" >> /etc/openvpn/server.conf
 
 # prepare internet forwarding
 sh -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'
@@ -50,8 +49,11 @@ mkdir /etc/openvpn/auth
 cp /usr/share/doc/openvpn-auth-ldap/examples/auth-ldap.conf /etc/openvpn/auth
 vim /etc/openvpn/auth/auth-ldap.conf
 
+# create log file
+touch /var/log/openvpn.log
+chown nobody.nogroup /var/log/openvpn.log
+
 /etc/init.d/slapd restart
 /etc/init.d/openvpn restart
-/etc/init.d/iptables restart 
 
 #vim /etc/openvpn/openvpn.conf
