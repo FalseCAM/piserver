@@ -14,6 +14,8 @@ cp -r /usr/share/doc/openvpn/examples/easy-rsa/2.0 /etc/openvpn/easy-rsa
 # prepare config file
 sed -i "s/export EASY_RSA=.*/export EASY_RSA=\"/etc/openvpn/easy-rsa\"/g" "/etc/openvpn/easy-rsa/vars"
 
+# edit vars file
+vim /etc/openvpn/easy-rsa/vars
 # load vars
 . "/etc/openvpn/easy-rsa/vars"
 
@@ -36,15 +38,6 @@ echo "plugin /usr/lib/openvpn/openvpn-auth-ldap.so /etc/openvpn/auth/auth-ldap.c
 echo "client-cert-not-required" >> /etc/openvpn/server.conf
 echo "log    /var/log/openvpn.log" >> /etc/openvpn/server.conf
 
-# prepare internet forwarding
-sh -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'
-# change eth0 with your network adapter
-iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
-
-(crontab -l 2>/dev/null; echo "@reboot sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE")| crontab - 
-
-sed -i "s/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g" "/etc/openvpn/easy-rsa/vars"
-
 mkdir /etc/openvpn/auth
 cp /usr/share/doc/openvpn-auth-ldap/examples/auth-ldap.conf /etc/openvpn/auth
 vim /etc/openvpn/auth/auth-ldap.conf
@@ -52,8 +45,20 @@ vim /etc/openvpn/auth/auth-ldap.conf
 # create log file
 touch /var/log/openvpn.log
 chown nobody.nogroup /var/log/openvpn.log
+sed -i "s/log.*/log	\"/var/log/openvpn.log\"/g" "/etc/openvpn/server.conf"
 
-/etc/init.d/slapd restart
+# prepare internet forwarding
+sh -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'
+sed -i "s/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g" "/etc/sysctl.conf"
+sysctl -p
+
+# change eth0 with your network adapter
+(crontab -l 2>/dev/null; echo "@reboot sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j SNAT --to-source ${piserverip}")| crontab - 
+
 /etc/init.d/openvpn restart
 
-#vim /etc/openvpn/openvpn.conf
+# prepare client config
+cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /etc/openvpn/client.ovpn
+sed -i "s/cert client.crt/#cert client.crt/g" "/etc/openvpn/client.ovpn"
+sed -i "s/key client.key/#key client.key/g" "/etc/openvpn/client.ovpn"
+echo "auth-user-pass" >> /etc/openvpn/client.ovpn
